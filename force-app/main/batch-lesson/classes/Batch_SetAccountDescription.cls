@@ -26,6 +26,7 @@ public with sharing class Batch_SetAccountDescription implements Database.Batcha
             };
             acc.Description = String.join(description, ' ');
             delete accounts;
+            System.debug('>>> Account' + acc.Name + 'processed');
         }
     }
 
