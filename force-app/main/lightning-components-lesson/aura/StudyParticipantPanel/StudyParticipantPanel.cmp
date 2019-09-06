@@ -15,9 +15,9 @@
     <!-- Component body: -->
     <lightning:card title="Study Participant Panel" class="sp-panel">
         <aura:if isTrue="{!v.initialized}">
-            <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.updateTable}"/>
+            <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.doSearch}"/>
             <c:StudyParticipantTable tableRows="{!v.pageRows}"/>
-            <c:Pagination pagination="{!v.pagination}" onchange="{!c.updateTable}"/>
+            <c:Pagination pagination="{!v.pagination}" onchange="{!c.doSearch}"/>
         </aura:if>
     </lightning:card>
 </aura:component>

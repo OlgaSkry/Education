@@ -16,8 +16,23 @@
     });
     $A.enqueueAction(action);
   },
-  updateTable: function(component, event, helper) {
-    alert('Update table action');
+
+  doSearch: function(component, event, helper) {
+    let action = component.get('c.search');
+    action.setParams({
+      filter: JSON.stringify(component.get('v.filter')),
+      pagination: JSON.stringify(component.get('v.pagination'))
+    });
+    action.setCallback(this, function(response) {
+      if (response.getState() === 'SUCCESS' ) {
+        let searchResponce = response.getReturnValue();
+        debugger;
+        component.set('v.pagination', searchResponce.paginationData);
+        component.set('v.pageRows', searchResponce.pageRecords);
+
+      }
+    });
+    $A.enqueueAction(action);
   }
 
 });

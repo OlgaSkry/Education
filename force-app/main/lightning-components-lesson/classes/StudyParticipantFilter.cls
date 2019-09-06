@@ -20,8 +20,8 @@ public with sharing class StudyParticipantFilter implements SearchFilter{
 
     public String getFilterString() {
         List<String> filters = new List<String>();
-        if(status != null) filters.add(' AND Status__c = \'' + status + '\'');
-        if(studyTitleTerm != null) filters.add(' Clinical_Study__r.Title__c LIKE \'%' + studyTitleTerm + '%\' ');
+        if(!String.isEmpty(status)) filters.add(' AND Status__c = \'' + status + '\'');
+        if(!String.isEmpty(studyTitleTerm)) filters.add(' Clinical_Study__r.Title__c LIKE \'%' + studyTitleTerm + '%\' ');
         if (filters.size() > 0) return ' WHERE ' + String.join(filters, ' AND ');
 
         return '';

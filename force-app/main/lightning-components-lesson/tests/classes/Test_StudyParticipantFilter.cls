@@ -60,6 +60,11 @@ private class Test_StudyParticipantFilter {
         StudyParticipantPanelRemote.InitData initData = StudyParticipantPanelRemote.getInitData();
         System.assert(initData.pagination.pagesCount == 2, 'Wrong number of pages:' + initData.pagination.pagesCount);
 
+        initData.pagination.currentPage = 2;
+        SearchResponse searchResponse = StudyParticipantPanelRemote.search(
+                JSON.serialize(initData.filter),
+                JSON.serialize(initData.filter));
+        System.assert(searchResponse.pageRecords.size() == 2, 'Wrong record number: ' + searchResponse.pageRecords.size());
     }
 }
 

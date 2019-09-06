@@ -18,4 +18,12 @@ public with sharing class StudyParticipantPanelRemote {
         initData.pagination = searchResponse.paginationData;
         return initData;
             }
+
+    @AuraEnabled
+    public static SearchResponse search(String filter, String pagination){
+        return SearchService.search(
+                (StudyParticipantFilter)JSON.deserialize(filter, StudyParticipantFilter.class),
+                (PaginationData)JSON.deserialize(pagination, PaginationData.class)
+        );
+    }
 }
