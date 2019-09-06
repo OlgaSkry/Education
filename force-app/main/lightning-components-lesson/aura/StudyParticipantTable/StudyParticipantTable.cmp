@@ -16,6 +16,9 @@
                 <th class="" scope="col">
                     <div class="slds-truncate" title="Participant Name">Participant Name</div>
                 </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Status">Status</div>
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -25,8 +28,11 @@
                         <th>
                             <div class="slds-truncate">{!studyParticipant.Clinical_Study__r.Title__c}</div>
                         </th>
-                        <td data-label="Account Name">
+                        <td >
                             <div class="slds-truncate">{!studyParticipant.Contact__r.Name}</div>
+                        </td>
+                        <td >
+                            <div class="slds-truncate">{!studyParticipant.Status__c}</div>
                         </td>
                     </tr>
                 </aura:iteration>

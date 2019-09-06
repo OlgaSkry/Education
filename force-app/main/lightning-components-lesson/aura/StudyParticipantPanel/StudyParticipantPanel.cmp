@@ -16,7 +16,10 @@
     <lightning:card title="Study Participant Panel" class="sp-panel">
         <aura:if isTrue="{!v.initialized}">
             <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.doSearch}"/>
-            <c:StudyParticipantTable tableRows="{!v.pageRows}"/>
+            <div class="table-container>">
+                <c:Spinner aura:id="spinner"/>
+                <c:StudyParticipantTable tableRows="{!v.pageRows}"/>
+            </div>
             <c:Pagination pagination="{!v.pagination}" onchange="{!c.doSearch}"/>
         </aura:if>
     </lightning:card>

@@ -5,3 +5,7 @@
 .THIS.sp-panel {
     min-height: 250px;
 }
+
+.THIS.table-container {
+    position: relative;
+}

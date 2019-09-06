@@ -4,31 +4,36 @@
 
 ({
   doInit: function(component, event, helper) {
-    let action = component.get('c.getInitData');
+    let action = component.get("c.getInitData");
     action.setCallback(this, function(response) {
-      if (response.getState() === 'SUCCESS' ) {
+      if (response.getState() === "SUCCESS") {
         let initData = response.getReturnValue();
-        component.set('v.pagination', initData.pagination);
-        component.set('v.filter', initData.filter);
-        component.set('v.pageRows', initData.pageRows);
-        component.set('v.initialized', true);
+        component.set("v.pagination", initData.pagination);
+        component.set("v.filter", initData.filter);
+        component.set("v.pageRows", initData.pageRows);
+        component.set("v.initialized", true);
       }
     });
     $A.enqueueAction(action);
   },
 
   doSearch: function(component, event, helper) {
-    let action = component.get('c.search');
+    debugger;
+    component.find('spinner').show();
+    let action = component.get("c.search");
     action.setParams({
-      filter: JSON.stringify(component.get('v.filter')),
-      pagination: JSON.stringify(component.get('v.pagination'))
+      filter: JSON.stringify(component.get("v.filter")),
+      pagination: JSON.stringify(component.get("v.pagination"))
     });
+    let currentTerm = component.get('v.filter.studyTitleTerm');
     action.setCallback(this, function(response) {
-      if (response.getState() === 'SUCCESS' ) {
+      if (response.getState() === "SUCCESS") {
         let searchResponce = response.getReturnValue();
-        debugger;
-        component.set('v.pagination', searchResponce.paginationData);
-        component.set('v.pageRows', searchResponce.pageRecords);
+        if (component.get("v.filter.studyTitleTerm") === currentTerm) {
+          component.set("v.pagination", searchResponce.paginationData);
+          component.set("v.pageRows", searchResponce.pageRecords);
+          component.find('spinner').hide();
+        }
 
       }
     });

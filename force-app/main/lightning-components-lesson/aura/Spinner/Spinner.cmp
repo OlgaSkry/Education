@@ -1,0 +1,17 @@
+<!--
+ - Created by user on 06.09.2019.
+ -->
+
+<aura:component description="Spinner">
+    <!-- attributes: -->
+    <aura:attribute name="size" type="String" default="small"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="alternativeText" type="String" default="Processing..."/>
+    <aura:attribute name="fixed" type="Boolean" default="false"/>
+    <!-- methods: -->
+    <aura:method name="show" action="{!c.doShow}"/>
+    <aura:method name="hide" action="{!c.doHide}"/>
+    <!-- component body: -->
+    <lightning:spinner variant="brand" size="{!v.size}" class="{!'rr-spinner ' + if(v.showSpinner, '', ' rr-hide ') + if(v.fixed, ' fixed ', '')}" alternativeText="{!v.alternativeText}"/>
+
+</aura:component>
