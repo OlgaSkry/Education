@@ -1,0 +1,37 @@
+<!--
+ - Created by user on 06.09.2019.
+ -->
+
+<aura:component description="StudyParticipantTable">
+
+    <!-- Attributes: -->
+    <aura:attribute name="tableRows" type="Study_Participant__c[]"/>
+    <div class="spt-container">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Clinical Study Title">Clinical Study Title</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Participant Name">Participant Name</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <aura:if isTrue="{!!empty(v.tableRows)}">
+                <aura:iteration items="{!v.tableRows}" var="studyParticipant">
+                    <tr class="slds-hint-parent">
+                        <th>
+                            <div class="slds-truncate">{!studyParticipant.Clinical_Study__r.Title__c}</div>
+                        </th>
+                        <td data-label="Account Name">
+                            <div class="slds-truncate">{!studyParticipant.Contact__r.Name}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </aura:if>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

@@ -4,16 +4,20 @@
 
 ({
   doInit: function(component, event, helper) {
-    component.set('v.filter', {
-      status: '',
-      studyTitleTerm: ''
+    let action = component.get('c.getInitData');
+    action.setCallback(this, function(response) {
+      if (response.getState() === 'SUCCESS' ) {
+        let initData = response.getReturnValue();
+        component.set('v.pagination', initData.pagination);
+        component.set('v.filter', initData.filter);
+        component.set('v.pageRows', initData.pageRows);
+        component.set('v.initialized', true);
+      }
     });
-    component.set('v.pagination', {
-      currentPage: 1,
-      pagesCount: 10
-    })
+    $A.enqueueAction(action);
   },
   updateTable: function(component, event, helper) {
     alert('Update table action');
   }
+
 });

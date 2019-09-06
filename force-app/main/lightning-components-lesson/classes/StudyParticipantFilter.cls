@@ -19,7 +19,8 @@ public with sharing class StudyParticipantFilter implements SearchFilter{
     }
 
     public String getFilterString() {
-        return ' WHERE Status__c = \'' + status + '\' AND Clinical_Study__r.Title__c LIKE \'%' +
-                studyTitleTerm + '%\' ';
+        String filter = ' WHERE Clinical_Study__r.Title__c LIKE \'%' + studyTitleTerm + '%\' ';
+        if(status != null) filter += ' AND Status__c = \'' + status + '\'';
+        return filter;
     }
 }

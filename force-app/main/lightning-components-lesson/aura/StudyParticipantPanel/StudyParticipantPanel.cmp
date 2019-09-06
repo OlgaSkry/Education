@@ -2,17 +2,22 @@
  - Created by user on 05.09.2019.
  -->
 
-<aura:component description="StudyParticipantPanel" implements="force:appHostable">
+<aura:component description="StudyParticipantPanel" implements="force:appHostable" controller="StudyParticipantPanelRemote">
     <!-- Attributes: -->
     <aura:attribute name="filter" type="StudyParticipantFilter"/>
     <aura:attribute name="pagination" type="PaginationData"/>
+    <aura:attribute name="pageRows" type="Study_Participant__c[]"/>
+    <aura:attribute name="initialized" type="Boolean" default="false"/>
 
     <!-- Handlers: -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
     <!-- Component body: -->
-    <lightning:card title="Study Participant Panel">
-        <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.updateTable}"/>
-        <c:Pagination pagination="{!v.pagination}" onchange="{!c.updateTable}"/>
+    <lightning:card title="Study Participant Panel" class="sp-panel">
+        <aura:if isTrue="{!v.initialized}">
+            <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.updateTable}"/>
+            <c:StudyParticipantTable tableRows="{!v.pageRows}"/>
+            <c:Pagination pagination="{!v.pagination}" onchange="{!c.updateTable}"/>
+        </aura:if>
     </lightning:card>
 </aura:component>
