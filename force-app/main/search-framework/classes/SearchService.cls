@@ -7,7 +7,7 @@ public with sharing class SearchService {
 
         String countQuery = 'SELECT COUNT()' +
                 ' FROM ' + searchFilter.getSObjectType() + ' ' + searchFilter.getFilterString();
-
+    System.debug('>>>' + countQuery);
         Integer allRecordsCount = Database.countQuery(countQuery);
         paginationData.setRecordsCount(allRecordsCount);
 
@@ -15,7 +15,7 @@ public with sharing class SearchService {
                 ' FROM ' + searchFilter.getSObjectType() + ' ' + searchFilter.getFilterString() + ' ' +
                 ' LIMIT ' + paginationData.pageRecordsCount +
                 ' OFFSET ' + paginationData.offset + ' ';
-
+        System.debug('>>>' + query);
         List<SObject> pageRecords = Database.query(query);
         return new SearchResponse(pageRecords, paginationData);
     }

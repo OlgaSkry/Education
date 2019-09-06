@@ -22,10 +22,13 @@ public with sharing class PaginationData {
     }
 
     public void recalc() {
+        System.debug('>>> ' + JSON.serializePretty(this));
         Decimal allRecordsCountDecimal = allRecordsCount;
         Decimal pageRecordsCountDecimal = pageRecordsCount;
         Decimal allPagesDecimal = allRecordsCountDecimal/pageRecordsCountDecimal;
         allPagesDecimal = allPagesDecimal.round(System.RoundingMode.UP);
+        pagesCount = allPagesDecimal.intValue() == 0 ? 1 : allPagesDecimal.intValue();
+
         if (currentPage > allPagesDecimal) currentPage = allPagesDecimal == 0 ? 1 : allPagesDecimal.intValue();
 
         offset = (currentPage - 1) * pageRecordsCount;
@@ -34,5 +37,6 @@ public with sharing class PaginationData {
         if (endOffset > allRecordsCount) endOffset = allRecordsCount;
 
         currentPageCount = endOffset - offset;
+        System.debug('>>> ' + JSON.serializePretty(this));
     }
 }

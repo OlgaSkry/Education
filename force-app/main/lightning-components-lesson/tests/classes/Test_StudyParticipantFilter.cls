@@ -4,7 +4,7 @@
 @IsTest
 private class Test_StudyParticipantFilter {
     @IsTest
-    static void testBehavior(){
+    static void testBehavior() {
 
         Test.startTest();                                                                   //старт тест
 
@@ -25,7 +25,7 @@ private class Test_StudyParticipantFilter {
         PaginationData paginationData = new PaginationData();                               //создаем новую переменную PaginationData
 
         SearchResponse response = SearchService.search(filter, paginationData);             //создаем переменную response и вызываем ей метод search в классе searchservice
-                                                                                            //передавая ей переменные filter and paginationData
+        //передавая ей переменные filter and paginationData
         PaginationData paginationData2 = new PaginationData();
         filter.studyTitleTerm = 'Help';
         SearchResponse response2 = SearchService.search(filter, paginationData2);
@@ -34,9 +34,34 @@ private class Test_StudyParticipantFilter {
 
         System.assert(response.paginationData.currentPageCount == 1, 'Wrong records count per current page');
         System.assert(response.pageRecords.size() == 1, 'Wrong records count per current page');
-
         System.assert(response2.pageRecords.size() == 0, 'Must be empty List');
 
-            }
+    }
 
+    @IsTest
+    private static void test2() {
+        Clinical_Study__c clinicalStudy = new Clinical_Study__c(
+                Title__c = 'TitleTest'
+        );
+        insert clinicalStudy;
+
+        for (Integer i = 0; i < 7; i++) {
+            Contact contact = new Contact(
+                    LastName = 'TestName' + i
+            );
+            insert contact;
+            Study_Participant__c studyParticipant = new Study_Participant__c(
+                    Contact__c = contact.Id,
+                    Clinical_Study__c = clinicalStudy.Id,
+                    Status__c = 'Open'
+            );
+            insert studyParticipant;
+        }
+        StudyParticipantPanelRemote.InitData initData = StudyParticipantPanelRemote.getInitData();
+        System.assert(initData.pagination.pagesCount == 2, 'Wrong number of pages:' + initData.pagination.pagesCount);
+
+    }
 }
+
+
+
