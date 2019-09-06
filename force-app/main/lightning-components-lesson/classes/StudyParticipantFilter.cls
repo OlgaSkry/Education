@@ -4,7 +4,7 @@
 
 public with sharing class StudyParticipantFilter implements SearchFilter{
     @AuraEnabled public String status;
-    @AuraEnabled public String StudyTitleTerm;
+    @AuraEnabled public String studyTitleTerm;
 
 
     public List<String> getFields() {
@@ -20,6 +20,6 @@ public with sharing class StudyParticipantFilter implements SearchFilter{
 
     public String getFilterString() {
         return ' WHERE Status__c = \'' + status + '\' AND Clinical_Study__r.Title__c LIKE \'%' +
-                StudyTitleTerm + '%\' ';
+                studyTitleTerm + '%\' ';
     }
 }

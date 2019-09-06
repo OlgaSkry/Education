@@ -1,0 +1,18 @@
+<!--
+ - Created by user on 05.09.2019.
+ -->
+
+<aura:component description="StudyParticipantPanel" implements="force:appHostable">
+    <!-- Attributes: -->
+    <aura:attribute name="filter" type="StudyParticipantFilter"/>
+    <aura:attribute name="pagination" type="PaginationData"/>
+
+    <!-- Handlers: -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- Component body: -->
+    <lightning:card title="Study Participant Panel">
+        <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.updateTable}"/>
+        <c:Pagination pagination="{!v.pagination}" onchange="{!c.updateTable}"/>
+    </lightning:card>
+</aura:component>
