@@ -2,24 +2,23 @@
  - Created by user on 05.09.2019.
  -->
 
-<aura:component description="StudyParticipantPanel" implements="force:appHostable" controller="StudyParticipantPanelRemote">
+<aura:component description="AccountPanel" implements="force:appHostable" controller="AccountPanelRemote">
     <!-- Attributes: -->
-    <aura:attribute name="filter" type="StudyParticipantFilter"/>
+    <aura:attribute name="filter" type="AccountFilter"/>
     <aura:attribute name="pagination" type="PaginationData"/>
-    <aura:attribute name="pageRows" type="Study_Participant__c[]"/>
+    <aura:attribute name="pageRows" type="Account[]"/>
     <aura:attribute name="initialized" type="Boolean" default="false"/>
 
     <!-- Handlers: -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <!--- <aura:handler event="c:UIEvent" action="{!c.doHeandlerEvent}"/> -->
 
     <!-- Component body: -->
-    <lightning:card title="Study Participant Panel" class="sp-panel">
+    <lightning:card title="Account Panel" class="acc-panel">
         <aura:if isTrue="{!v.initialized}">
-            <c:StudyParticipantFilter filter="{!v.filter}" onchange="{!c.doSearch}"/>
+            <c:AccountFilter filter="{!v.filter}" onchange="{!c.doSearch}"/>
             <div class="table-container>">
                 <c:Spinner aura:id="spinner"/>
-                <c:StudyParticipantTable tableRows="{!v.pageRows}"/>
+                <c:AccountTable tableRows="{!v.pageRows}"/>
             </div>
             <c:Pagination pagination="{!v.pagination}" onchange="{!c.doSearch}"/>
         </aura:if>

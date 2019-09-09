@@ -1,0 +1,31 @@
+<!--
+ - Created by user on 06.09.2019.
+ -->
+
+<aura:component description="AccountTable">
+
+    <!-- Attributes: -->
+    <aura:attribute name="tableRows" type="Account[]"/>
+    <div class="ac-container">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Account Name">Account Name</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <aura:if isTrue="{!!empty(v.tableRows)}">
+                <aura:iteration items="{!v.tableRows}" var="acc">
+                    <tr class="slds-hint-parent">
+                        <th>
+                            <div class="slds-truncate">{!acc.Name}</div>
+                        </th>
+                    </tr>
+                </aura:iteration>
+            </aura:if>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

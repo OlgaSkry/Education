@@ -1,0 +1,27 @@
+<!--
+ - Created by user on 05.09.2019.
+ -->
+
+<aura:component description="AccountFilter">
+    <!-- Attributes: -->
+    <aura:attribute name="filter" type="AccountFilter"/>
+
+    <!-- Events: -->
+    <aura:registerEvent name="onchange" type="c:UIEvent" access="global"/>
+
+    <!-- Component Body: -->
+    <lightning:card title="Filter" class="filter-panel">
+        <div class="slds-grid account-form">
+            <div class="slds-col">
+                <lightning:input
+                        aura:id="enter-search"
+                        name="enter-search"
+                        label="Account Search"
+                        type="search"
+                        value="{!v.filter.accName}"
+                        onchange="{!c.processChanges}"
+                />
+            </div>
+        </div>
+    </lightning:card>
+</aura:component>
