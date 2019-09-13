@@ -1,0 +1,37 @@
+<apex:page controller="StreamingAPIController">
+    <apex:includeScript value="{!$Resource.cometd2}"/>
+    <apex:includeScript value="{!$Resource.jquery341}"/>
+    <apex:includeScript value="{!$Resource.json2}"/>
+    <apex:includeScript value="{!$Resource.jquerycometd}"/>
+    <script type="text/javascript">
+      (function($) {
+        $(document).ready(function() {
+          // Connect to the CometD endpoint
+          $.cometd.init({
+            url: window.location.protocol + '//' + window.location.hostname + '/cometd/24.0/',
+            requestHeaders: {
+              Authorization: 'OAuth {!$Api.Session_ID}'
+            }
+          });
+          // Subscribe to a topic. JSON-encoded update will be returned
+          // in the callback
+          $.cometd.subscribe('/topic/OpportunityCreateUpdate', function(message) {
+            callRefresh();
+          });
+        });
+      })(jQuery)
+      function disconnect() {
+        $.cometd.disconnect();
+      }
+      window.onbeforeunload = disconnect;
+    </script>
+    <apex:form >
+        <apex:actionFunction name="callRefresh" action="{!refresh}"/>
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!listOpportunity}" var="objOpp">
+                <apex:column value="{!objOpp.Name}"/>
+                <apex:column value="{!objOpp.StageName}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
